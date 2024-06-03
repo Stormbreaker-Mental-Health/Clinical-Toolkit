@@ -23,7 +23,7 @@ export default function SuggestedApps() {
         <div className="space-y-4">
           <div className="flex items-center">
             <img
-              src="/placeholder.svg"
+              src={`${prefix}/placeholder.svg`}
               alt="Tap Tap Fish"
               className="h-12 w-12 rounded-md"
             />
@@ -37,7 +37,7 @@ export default function SuggestedApps() {
           </div>
           <div className="flex items-center">
             <img
-              src="/placeholder.svg"
+              src={`${prefix}/placeholder.svg`}
               alt="Medito"
               className="h-12 w-12 rounded-md"
             />
@@ -51,7 +51,7 @@ export default function SuggestedApps() {
           </div>
           <div className="flex items-center">
             <img
-              src="/placeholder.svg"
+              src={`${prefix}/placeholder.svg`}
               alt="Candy Crush"
               className="h-12 w-12 rounded-md"
             />
@@ -65,7 +65,7 @@ export default function SuggestedApps() {
           </div>
           <div className="flex items-center">
             <img
-              src="/placeholder.svg"
+              src={`${prefix}/placeholder.svg`}
               alt="Tetris Beat"
               className="h-12 w-12 rounded-md"
             />
@@ -82,7 +82,7 @@ export default function SuggestedApps() {
         <div className="space-y-4">
           <div className="flex items-center">
             <img
-              src="/placeholder.svg"
+              src={`${prefix}/placeholder.svg`}
               alt="Medito"
               className="h-12 w-12 rounded-md"
             />
@@ -96,7 +96,7 @@ export default function SuggestedApps() {
           </div>
           <div className="flex items-center">
             <img
-              src="/placeholder.svg"
+              src={`${prefix}/placeholder.svg`}
               alt="Candy Crush"
               className="h-12 w-12 rounded-md"
             />
@@ -110,7 +110,7 @@ export default function SuggestedApps() {
           </div>
           <div className="flex items-center">
             <img
-              src="/placeholder.svg"
+              src={`${prefix}/placeholder.svg`}
               alt="Tetris Beat"
               className="h-12 w-12 rounded-md"
             />
