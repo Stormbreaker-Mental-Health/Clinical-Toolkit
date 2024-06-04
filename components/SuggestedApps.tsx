@@ -1,8 +1,37 @@
 import { SVGProps } from "react";
 import Image from "next/image";
 import { prefix } from "../utils/prefix";
+import { useLocalization } from "../hooks/useLocalization";
+
+const Item = (props: {
+  title: string;
+  description: string;
+  link: string;
+  image: string;
+}) => {
+  return (
+    <div className="flex items-center bg-gray-200 rounded-md p-2 mb-2">
+      <img
+        src={props.image}
+        alt={props.title}
+        className="h-12 w-12 rounded-md"
+      />
+      <div className="ml-4 flex-1">
+        <h3 className="font-semibold">{props.title}</h3>
+        <p className="text-sm text-gray-600">{props.description}</p>
+      </div>
+      <DownloadIcon
+        className="h-6 w-6 text-gray-600 cursor-pointer"
+        onClick={() => {
+          window.open(props.link, "_blank");
+        }}
+      />
+    </div>
+  );
+};
 
 export default function SuggestedApps() {
+  const locale = useLocalization();
   return (
     <div className="w-full">
       <div className="flex items-center justify-center px-4 py-2 border-b gap-4">
@@ -13,116 +42,62 @@ export default function SuggestedApps() {
           height={44}
           className="rounded-md"
         />
-        <h1 className="text-2xl font-light">StormBreaker Clinical Toolkit</h1>
+        <h1 className="text-2xl font-light">{locale.headers.title}</h1>
       </div>
       <div className="flex items-center justify-center px-4 py-2 border-b">
-        <h1 className="text-xl font-semibold">Suggested Apps</h1>
+        <h1 className="text-xl font-semibold">
+          {locale.headers.clinical_resources_title}
+        </h1>
       </div>
       <div className="px-4 py-2">
-        <h2 className="text-lg font-semibold mb-4">Distraction tools:</h2>
         <div className="space-y-4">
-          <div className="flex items-center">
-            <img
-              src={`${prefix}/placeholder.svg`}
-              alt="Tap Tap Fish"
-              className="h-12 w-12 rounded-md"
-            />
-            <div className="ml-4 flex-1">
-              <h3 className="font-semibold">Tap Tap Fish</h3>
-              <p className="text-sm text-gray-600">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              </p>
-            </div>
-            <DownloadIcon className="h-6 w-6 text-gray-600" />
-          </div>
-          <div className="flex items-center">
-            <img
-              src={`${prefix}/placeholder.svg`}
-              alt="Medito"
-              className="h-12 w-12 rounded-md"
-            />
-            <div className="ml-4 flex-1">
-              <h3 className="font-semibold">Medito</h3>
-              <p className="text-sm text-gray-600">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              </p>
-            </div>
-            <DownloadIcon className="h-6 w-6 text-gray-600" />
-          </div>
-          <div className="flex items-center">
-            <img
-              src={`${prefix}/placeholder.svg`}
-              alt="Candy Crush"
-              className="h-12 w-12 rounded-md"
-            />
-            <div className="ml-4 flex-1">
-              <h3 className="font-semibold">Candy Crush</h3>
-              <p className="text-sm text-gray-600">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              </p>
-            </div>
-            <DownloadIcon className="h-6 w-6 text-gray-600" />
-          </div>
-          <div className="flex items-center">
-            <img
-              src={`${prefix}/placeholder.svg`}
-              alt="Tetris Beat"
-              className="h-12 w-12 rounded-md"
-            />
-            <div className="ml-4 flex-1">
-              <h3 className="font-semibold">Tetris Beat</h3>
-              <p className="text-sm text-gray-600">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              </p>
-            </div>
-            <DownloadIcon className="h-6 w-6 text-gray-600" />
-          </div>
+          {Object.entries(locale.clinical_resources).map(([key, value]) => {
+            return (
+              <Item
+                key={key}
+                image={value.link}
+                title={value.title}
+                description={value.description}
+                link={value.link}
+              />
+            );
+          })}
         </div>
-        <h2 className="text-lg font-semibold mt-8 mb-4">Calming tools:</h2>
-        <div className="space-y-4">
-          <div className="flex items-center">
-            <img
-              src={`${prefix}/placeholder.svg`}
-              alt="Medito"
-              className="h-12 w-12 rounded-md"
+      </div>
+      <div className="flex items-center justify-center px-4 py-2 border-b">
+        <h1 className="text-xl font-semibold">
+          {locale.headers.suggested_apps_title}
+        </h1>
+      </div>
+      <div className="px-4 py-2">
+        <h2 className="text-lg font-light mb-4">
+          {locale.headers.distraction_tools_title}:
+        </h2>
+        {Object.entries(locale.suggested_apps).map(([key, value]) => {
+          return value.category === "distraction" ? (
+            <Item
+              key={key}
+              title={value.title}
+              description={value.description}
+              link={value.link}
+              image={value.image}
             />
-            <div className="ml-4 flex-1">
-              <h3 className="font-semibold">Medito</h3>
-              <p className="text-sm text-gray-600">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              </p>
-            </div>
-            <DownloadIcon className="h-6 w-6 text-gray-600" />
-          </div>
-          <div className="flex items-center">
-            <img
-              src={`${prefix}/placeholder.svg`}
-              alt="Candy Crush"
-              className="h-12 w-12 rounded-md"
+          ) : null;
+        })}
+        <h2 className="text-lg font-light mt-8 mb-4">
+          {locale.headers.calming_tools_title}:
+        </h2>
+        {Object.entries(locale.suggested_apps).map(([key, value]) => {
+          return value.category === "calming" ? (
+            <Item
+              key={key}
+              title={value.title}
+              description={value.description}
+              link={value.link}
+              image={value.image}
             />
-            <div className="ml-4 flex-1">
-              <h3 className="font-semibold">Candy Crush</h3>
-              <p className="text-sm text-gray-600">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              </p>
-            </div>
-            <DownloadIcon className="h-6 w-6 text-gray-600" />
-          </div>
-          <div className="flex items-center">
-            <img
-              src={`${prefix}/placeholder.svg`}
-              alt="Tetris Beat"
-              className="h-12 w-12 rounded-md"
-            />
-            <div className="ml-4 flex-1">
-              <h3 className="font-semibold">Tetris Beat</h3>
-              <p className="text-sm text-gray-600">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              </p>
-            </div>
-            <DownloadIcon className="h-6 w-6 text-gray-600" />
-          </div>
-        </div>
+          ) : null;
+        })}
       </div>
     </div>
   );
