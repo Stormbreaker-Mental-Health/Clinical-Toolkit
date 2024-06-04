@@ -12,14 +12,14 @@ const LanguageContext = createContext<LanguageContextProps | undefined>(
 export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const browserLocale = (navigator.language || navigator.languages[0]).includes(
-    "es"
-  )
-    ? "es"
-    : "en";
   const [language, setLanguage] = useState<string>("");
 
   useEffect(() => {
+    const browserLocale = (
+      navigator.language || navigator.languages[0]
+    ).includes("es")
+      ? "es"
+      : "en";
     const preferredLanguage = localStorage.getItem("preferredLanguage");
     setLanguage(preferredLanguage || browserLocale);
   }, []);
