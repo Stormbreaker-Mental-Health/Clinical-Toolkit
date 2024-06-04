@@ -1,6 +1,7 @@
 import { collection, doc, getDoc } from "firebase/firestore";
 import React, { createContext, useContext, useEffect, useReducer } from "react";
 import { firestore } from "../utils/firebase";
+import { useLanguage } from "./useLanguageContext";
 
 export interface LocalizationState {
   clinical_resources: { [key: string]: any };
@@ -63,8 +64,11 @@ const transformData = (data: any, isSpanish: boolean): any => {
   );
 };
 
-const LocalizationProvider = (props: { children: React.ReactNode }) => {
+const LocalizationProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   const [state, dispatch] = useReducer(localizationReducer, initialState);
+  const { language } = useLanguage();
 
   useEffect(() => {
     const fetchLocalizationData = async () => {
@@ -72,8 +76,7 @@ const LocalizationProvider = (props: { children: React.ReactNode }) => {
       const docRefs = ["clinical_resources", "headers", "suggested_apps"].map(
         (docId) => doc(collectionRef, docId)
       );
-      const browserLocale = navigator.language || navigator.languages[0];
-      const isSpanish = browserLocale.includes("es");
+      const isSpanish = language === "es";
 
       const docSnaps = await Promise.all(
         docRefs.map((docRef) => getDoc(docRef))
@@ -97,12 +100,13 @@ const LocalizationProvider = (props: { children: React.ReactNode }) => {
         },
       });
     };
+
     fetchLocalizationData();
-  }, []);
+  }, [language]);
 
   return (
     <LocalizationContext.Provider value={{ state, dispatch }}>
-      {props.children}
+      {children}
     </LocalizationContext.Provider>
   );
 };

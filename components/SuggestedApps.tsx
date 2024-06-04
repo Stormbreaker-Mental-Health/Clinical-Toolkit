@@ -2,6 +2,7 @@ import { SVGProps } from "react";
 import Image from "next/image";
 import { prefix } from "../utils/prefix";
 import { useLocalization } from "../hooks/useLocalization";
+import LanguagePicker from "./LanguagePicker";
 
 const Item = (props: {
   title: string;
@@ -34,7 +35,7 @@ export default function SuggestedApps() {
   const locale = useLocalization();
   return (
     <div className="w-full">
-      <div className="flex items-center justify-center px-4 py-2 border-b gap-4">
+      <div className="flex items-center justify-between px-4 py-2 border-b gap-4">
         <Image
           src={`${prefix}/logo.png`}
           alt="Vercel Logo"
@@ -43,6 +44,7 @@ export default function SuggestedApps() {
           className="rounded-md"
         />
         <h1 className="text-2xl font-light">{locale.headers.title}</h1>
+        <LanguagePicker />
       </div>
       <div className="flex items-center justify-center px-4 py-2 border-b">
         <h1 className="text-xl font-semibold">
