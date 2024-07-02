@@ -7,6 +7,8 @@ export interface LocalizationState {
   clinical_resources: { [key: string]: any };
   headers: { [key: string]: any };
   suggested_apps: { [key: string]: any };
+  support: { [key: string]: any };
+  configurable: { [key: string]: any };
 }
 
 export interface Action {
@@ -27,6 +29,8 @@ const initialState: LocalizationState = {
   clinical_resources: {},
   headers: {},
   suggested_apps: {},
+  support: {},
+  configurable: {},
 };
 
 const LocalizationContext = createContext({} as ContextProps);
@@ -38,6 +42,8 @@ const useLocalization = () => {
     clinical_resources: context.state.clinical_resources,
     headers: context.state.headers,
     suggested_apps: context.state.suggested_apps,
+    support: context.state.support,
+    configurable: context.state.configurable,
   };
 };
 
@@ -73,9 +79,13 @@ const LocalizationProvider: React.FC<{ children: React.ReactNode }> = ({
   useEffect(() => {
     const fetchLocalizationData = async () => {
       const collectionRef = collection(firestore, "clinical_toolkit");
-      const docRefs = ["clinical_resources", "headers", "suggested_apps"].map(
-        (docId) => doc(collectionRef, docId)
-      );
+      const docRefs = [
+        "clinical_resources",
+        "headers",
+        "suggested_apps",
+        "support",
+        "configurable",
+      ].map((docId) => doc(collectionRef, docId));
       const isSpanish = language === "es";
 
       const docSnaps = await Promise.all(
@@ -97,6 +107,8 @@ const LocalizationProvider: React.FC<{ children: React.ReactNode }> = ({
           clinical_resources: transformedData["doc1"],
           headers: transformedData["doc2"],
           suggested_apps: transformedData["doc3"],
+          support: transformedData["doc4"],
+          configurable: transformedData["doc5"],
         },
       });
     };
