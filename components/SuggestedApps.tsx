@@ -100,6 +100,20 @@ export default function SuggestedApps() {
             />
           ) : null;
         })}
+        <h2 className="text-lg font-light mt-8 mb-4">
+          {locale.headers.other_tools_title}:
+        </h2>
+        {Object.entries(locale.suggested_apps).map(([key, value]) => {
+          return value.category === "other" ? (
+            <Item
+              key={key}
+              title={value.title}
+              description={value.description}
+              link={value.link}
+              image={value.image}
+            />
+          ) : null;
+        })}
       </div>
     </div>
   );
