@@ -1,7 +1,6 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
-import styles from "../styles/Home.module.css";
 import { prefix } from "../utils/prefix";
 import SuggestedApps from "../components/SuggestedApps";
 import { useLocalization } from "../hooks/useLocalization";
@@ -17,7 +16,7 @@ const Home: NextPage = () => {
           name="description"
           content="Stormbreaker Mental Health Awareness"
         />
-        <link rel="icon" href={`${prefix}/favicon.ico`} />
+        <link rel="icon" href={`${prefix}/logo.png`} />
       </Head>
 
       <main className="bg-gray-300 w-full max-w-5xl mx-auto flex-grow rounded-none lg:rounded-md m-0 lg:m-8">
@@ -36,9 +35,9 @@ const Home: NextPage = () => {
             alt="Vercel Logo"
             width={24}
             height={24}
-            className="rounded-md"
+            className="rounded-md mr-1"
           />
-          StormBreaker
+          Stormbreaker
           <span>&copy;</span> {new Date().getFullYear()}
         </a>
       </footer>
