@@ -91,7 +91,6 @@ const LocalizationProvider: React.FC<{ children: React.ReactNode }> = ({
       const docSnaps = await Promise.all(
         docRefs.map((docRef) => getDoc(docRef))
       );
-
       const transformedData = docSnaps.reduce((acc: any, docSnap, index) => {
         if (docSnap.exists()) {
           const rawData = docSnap.data();
