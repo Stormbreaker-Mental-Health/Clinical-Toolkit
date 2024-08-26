@@ -90,6 +90,16 @@ export default function SuggestedApps() {
               <Item key={key} {...value} />
             ) : null;
           })}
+        <h2 className="text-lg font-light mt-8 mb-4">
+          {locale.headers.other_tools_title}:
+        </h2>
+        {Object.entries(locale.suggested_apps)
+          .sort(([, a], [, b]) => a.order - b.order)
+          .map(([key, value]) => {
+            return value.category === "other" ? (
+              <Item key={key} {...value} />
+            ) : null;
+          })}
       </div>
     </div>
   );
