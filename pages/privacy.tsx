@@ -21,7 +21,7 @@ export default function PrivacyPolicy() {
           className="rounded-md"
         />
         <h1 className="text-2xl font-light">
-          <a href="/">Stormbreaker Clinical Toolkit</a>
+          <a href="/Clinical-Toolkit/">Stormbreaker Clinical Toolkit</a>
         </h1>
         <LanguagePicker
           availableLanguages={[{ code: "en", name: "English", flag: "🇺🇸" }]}
