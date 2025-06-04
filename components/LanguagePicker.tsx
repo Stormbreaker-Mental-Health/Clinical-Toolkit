@@ -6,7 +6,11 @@ const languageOptions = [
   { code: "es", name: "Spanish", flag: "🇪🇸" },
 ];
 
-const LanguagePicker: React.FC = () => {
+const LanguagePicker = ({
+  availableLanguages = languageOptions,
+}: {
+  availableLanguages?: { code: string; name: string; flag: string }[];
+}) => {
   const { language, setLanguage } = useLanguage();
 
   const handleLanguageChange = (code: string) => {
@@ -18,7 +22,7 @@ const LanguagePicker: React.FC = () => {
 
   return (
     <div className="flex gap-1">
-      {languageOptions.map((option) => (
+      {availableLanguages.map((option) => (
         <button
           key={option.code}
           onClick={() => handleLanguageChange(option.code)}
